@@ -25,8 +25,8 @@ services:
     restart: unless-stopped
     volumes:
       - /var/lib/docker/volumes/mosquitto_config/_data:/config
-      - /var/lib/docker/volumes/mosquitto_data/_data:/data
-      - /var/lib/docker/volumes/mosquitto_log/_data:/log
+      - /var/lib/docker/volumes/mosquitto_data/_data:/mosquitto/data
+      - /var/lib/docker/volumes/mosquitto_log/_data:/mosquitto/log
     ports:
       - "1883:1883" # Standard MQTT port
       - "1884:1884" # Standard MQTT port

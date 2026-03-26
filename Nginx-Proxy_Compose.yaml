@@ -1,0 +1,20 @@
+services:
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
+    ports:
+      # These ports are in format <host-port>:<container-port>
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '81:81' # Admin Web Port
+    #networks:
+    #  - dockhand_0_default
+    network_mode: bridge
+    volumes:
+      - /var/lib/docker/volumes/NPM-data/_data:/data
+      - /var/lib/docker/volumes/NPM-etc-letsencrypt/_data:/etc/letsencrypt
+
+#networks:
+#  dockhand_0_default:
+#    external: true

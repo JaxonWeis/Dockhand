@@ -1,0 +1,52 @@
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    restart: unless-stopped
+    volumes:
+      - /var/lib/docker/volumes/config-HomeAssistant/_data:/config
+      - /run/dbus:/run/dbus:ro
+    ports:
+      - "8123:8123"
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=America/Chicago
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    privileged: false
+    network_mode: host
+
+  
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:latest
+    restart: unless-stopped
+    volumes:
+      - /var/lib/docker/volumes/mosquitto_config/_data:/config
+      - /var/lib/docker/volumes/mosquitto_data/_data:/data
+      - /var/lib/docker/volumes/mosquitto_log/_data:/log
+    ports:
+      - "1883:1883" # Standard MQTT port
+      - "1884:1884" # Standard MQTT port
+      - "9883:9883" # Websocket port
+    environment:
+      - TZ=America/Chicago
+    network_mode: bridge
+
+  
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: ghcr.io/koenkk/zigbee2mqtt
+    restart: unless-stopped
+    volumes:
+      - /var/lib/docker/volumes/Zigbee2MQTT-app-data/_data:/app/data
+      - /run/udev:/run/udev:ro
+    ports:
+      - "8081:8080" # Frontend port
+    environment:
+      - TZ=America/Chicago
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0 # Make sure this matched your adapter location
+    network_mode: bridge

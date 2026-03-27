@@ -4,7 +4,7 @@ services:
     image: ghcr.io/home-assistant/home-assistant:stable
     restart: unless-stopped
     volumes:
-      - /var/lib/docker/volumes/config-HomeAssistant/_data:/config
+      - /var/lib/docker/volumes/HomeAssistant_config/_data:/config
       - /run/dbus:/run/dbus:ro
     ports:
       - "8123:8123"

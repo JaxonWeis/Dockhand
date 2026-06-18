@@ -48,5 +48,5 @@ services:
     environment:
       - TZ=America/Chicago
     devices:
-      - /dev/ttyUSB0:/dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_ee7930a9f14eef11a50045b3174bec31-if00-port0 # Make sure this matched your adapter location
+      - /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_ee7930a9f14eef11a50045b3174bec31-if00-port0:/dev/ttyUSB0 # Make sure this matched your adapter location
     network_mode: bridge

@@ -12,9 +12,11 @@ services:
     #  - dockhand_0_default
     network_mode: bridge
     volumes:
-      - /var/lib/docker/volumes/NPM-data/_data:/data
-      - /var/lib/docker/volumes/NPM-etc-letsencrypt/_data:/etc/letsencrypt
+      - NPM_data:/data
+      - NPM_etc_letsencrypt:/etc/letsencrypt
 
-#networks:
-#  dockhand_0_default:
-#    external: true
+volumes:
+  NPM_data:
+    external: true
+  NPM_etc_letsencrypt:
+    external: true

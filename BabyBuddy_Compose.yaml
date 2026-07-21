@@ -17,3 +17,10 @@ services:
 volumes:
   BabyBuddy_Config:
     external: true
+
+healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
+      start_period: 60s

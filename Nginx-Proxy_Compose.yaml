@@ -4,16 +4,19 @@ services:
     container_name: nginx-proxy-manager
     restart: unless-stopped
     ports:
-      # These ports are in format <host-port>:<container-port>
       - '80:80' # Public HTTP Port
       - '443:443' # Public HTTPS Port
       - '81:81' # Admin Web Port
-    #networks:
-    #  - dockhand_0_default
     network_mode: bridge
     volumes:
       - NPM_data:/data
       - NPM_etc_letsencrypt:/etc/letsencrypt
+    healthcheck:
+      test: ["CMD", "/usr/bin/check-health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
 
 volumes:
   NPM_data:

@@ -13,14 +13,13 @@ services:
       - 8000:8000
     restart: unless-stopped
     network_mode: bridge
-
-volumes:
-  BabyBuddy_Config:
-    external: true
-
-healthcheck:
+    healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000"]
       interval: 1m
       timeout: 10s
       retries: 3
       start_period: 60s
+
+volumes:
+  BabyBuddy_Config:
+    external: true
